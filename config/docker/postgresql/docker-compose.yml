@@ -1,0 +1,16 @@
+cryptopus-postgres:
+    image: postgres:12.10
+    container_name: cryptopus-postgres
+    environment:
+      POSTGRES_PASSWORD: password
+      RAILS_DB_ADAPTER: 'postgresql'
+      RAILS_DB_HOST: 'cryptopus-postgres'
+      RAILS_DB_NAME: 'cryptopus-postgres-db'
+      RAILS_DB_USERNAME: 'postgres'
+      RAILS_DB_PASSWORD: 'password'
+      RAILS_DB_PORT: 5432
+    restart: always
+    ports:
+      - "3306:3306"
+    volumes:
+      - cryptopus-postgres:/var/lib/postgres

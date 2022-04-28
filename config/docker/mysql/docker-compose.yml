@@ -9,7 +9,9 @@ services:
     environment:
       RAILS_DB_ADAPTER: 'mysql2'
       RAILS_DB_HOST: 'cryptopus-mysql'
-      RAILS_DB_NAME: 'cryptopus_prod'
+      RAILS_DB_NAME: 'cryptopus-mysql-db'
+      RAILS_DB_USERNAME: 'root'
+      RAILS_DB_PASSWORD: 'example'
       RAILS_DB_PORT: 3306
       # RAILS_HOST_SSL: 'false' # uncomment for disabling ssl force
     ports:
