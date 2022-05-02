@@ -1,30 +1,13 @@
 version: '2'
 
-services:
-  cryptopus:
-    image: quay.io/puzzle/cryptopus:stable
-    container_name: cryptopus
-    env_file:
-      - mysql-prod.env
-    environment:
-      RAILS_DB_ADAPTER: 'mysql2'
-      RAILS_DB_HOST: 'cryptopus-mysql'
-      RAILS_DB_NAME: 'cryptopus-mysql-db'
-      RAILS_DB_USERNAME: 'root'
-      RAILS_DB_PASSWORD: 'example'
-      RAILS_DB_PORT: 3306
-      # RAILS_HOST_SSL: 'false' # uncomment for disabling ssl force
-    ports:
-      - localhost:8080:3000
-    links:
-      - cryptopus-mysql:cryptopus-mysql
-  cryptopus-mysql:
+cryptopus-mysql:
     image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
     container_name: cryptopus-mysql
-    env_file:
-      - mysql-prod.env
+    environment:
+      MYSQL_ROOT_PASSWORD: example
     restart: always
+    ports:
+      - "3306:3306"
     volumes:
       - cryptopus-mysql:/var/lib/mysql
-volumes:
-  cryptopus-mysql:
