@@ -7,19 +7,7 @@ services:
     tty: true
     stdin_open: true
     environment:
-      DISPLAY=${DISPLAY}
-      RAILS_DB_ADAPTER: 'postgresql'
-      RAILS_DB_HOST: 'cryptopus-postgres'
-      RAILS_DB_NAME: 'cryptopus-postgres-db'
-      RAILS_DB_USERNAME: 'postgres'
-      RAILS_DB_PASSWORD: 'password'
-      RAILS_DB_PORT: 5432
-      RAILS_DB_ADAPTER: 'mysql2'
-      RAILS_DB_HOST: 'cryptopus-mysql'
-      RAILS_DB_NAME: 'cryptopus-mysql-db'
-      RAILS_DB_USERNAME: 'root'
-      RAILS_DB_PASSWORD: 'example'
-      RAILS_DB_PORT: 3306
+      - DISPLAY=${DISPLAY}
     build:
       context: ./config/docker/development
       dockerfile: Rails.dockerfile
