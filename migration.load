@@ -1,3 +1,0 @@
-LOAD DATABASE
-  FROM mysql://root:example@localhost/cryptopus-db
-  INTO postgresql://postgres:password/cryptopus-db
