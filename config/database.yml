@@ -6,7 +6,7 @@
 # PostgreSQL. Versions 8.2 and up are supported.
 #
 base: &generic
-  adapter: sqlite3
+  adapter: <%= ENV['RAILS_DB_ADAPTER'] || 'sqlite3' %>
   pool: 5
   encoding: utf8
 <% %w(host port username password).each do |option| %>
