@@ -98,14 +98,4 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_01_130939) do
     t.index ["default_ccli_user_id"], name: "index_users_on_default_ccli_user_id"
   end
 
-  create_table "versions", force: :cascade do |t|
-    t.string "item_type", null: false
-    t.bigint "item_id", null: false
-    t.string "event", null: false
-    t.string "whodunnit"
-    t.text "object", limit: 1073741823
-    t.datetime "created_at"
-    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
-  end
-
 end
