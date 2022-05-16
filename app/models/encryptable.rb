@@ -30,6 +30,13 @@ class Encryptable < ApplicationRecord
   validates :name, length: { maximum: 70 }
   validates :description, length: { maximum: 4000 }
 
+  include PgSearch::Model
+  pg_search_scope :search_starts_with,
+                  against: [:name, :description],
+                  using: {
+                    tsearch: { prefix: true }
+                  }
+
   def encrypt(_team_password)
     raise 'implement in subclass'
   end
