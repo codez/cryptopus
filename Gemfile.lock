@@ -201,6 +201,9 @@ GEM
     password_strength (1.1.4)
       activemodel
     pg (1.3.5)
+    pg_search (2.3.6)
+      activerecord (>= 5.2)
+      activesupport (>= 5.2)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -386,6 +389,7 @@ DEPENDENCIES
   openid_connect
   password_strength
   pg
+  pg_search
   pry
   pry-stack_explorer
   puma
@@ -408,4 +412,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   2.2.32
+   2.2.33

@@ -32,6 +32,12 @@ class Encryptable < ApplicationRecord
 
   scope :without_files, -> { where.not(type: Encryptable::File.sti_name) }
 
+  include PgSearch::Model
+  pg_search_scope :search_starts_with,
+                  against: [:name, :description],
+                  using: {
+                    tsearch: { prefix: true }
+                  }
   def encrypt(_team_password)
     raise 'implement in subclass'
   end
