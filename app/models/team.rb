@@ -51,15 +51,6 @@ class Team < ApplicationRecord
     name
   end
 
-  def member_candidates
-    excluded_user_ids = User::Human.
-                        unscoped.joins('LEFT JOIN teammembers ON users.id = teammembers.user_id').
-                        where('users.username = "root" OR teammembers.team_id = ?', id).
-                        distinct.
-                        pluck(:id)
-    User::Human.where('id NOT IN(?)', excluded_user_ids)
-  end
-
   def last_teammember?(user_id)
     teammembers.count == 1 && teammember?(user_id)
   end
@@ -72,19 +63,24 @@ class Team < ApplicationRecord
     teammembers.find_by(user_id: user_id)
   end
 
+  def decrypt_team_password(user, plaintext_private_key)
+    crypted_team_password = teammember(user.id).password
+    Crypto::Rsa.decrypt(crypted_team_password, plaintext_private_key)
+  end
+
+  def personal_team?
+    # self is required for this method to work, even tho RuboCop is complaining
+    self.is_a?(Team::Personal) # rubocop:disable Style/RedundantSelf
+  end
+
   def add_user(user, plaintext_team_password)
     raise 'user is already team member' if teammember?(user.id)
 
     create_teammember(user, plaintext_team_password)
   end
 
-  def remove_user(user)
-    teammember(user.id).destroy!
-  end
-
-  def decrypt_team_password(user, plaintext_private_key)
-    crypted_team_password = teammember(user.id).password
-    Crypto::Rsa.decrypt(crypted_team_password, plaintext_private_key)
+  def self.policy_class
+    TeamPolicy
   end
 
   private
