@@ -6,16 +6,16 @@ services:
     user: "${UID:-1000}"
     tty: true
     stdin_open: true
-  environment:
-    RAILS_DB_ADAPTER: 'postgresql'
-    RAILS_DB_HOST: 'cryptopus-postgres'
-    RAILS_DB_NAME: 'cryptopus-postgres-db'
-    RAILS_DB_USERNAME: 'postgres'
-    RAILS_DB_PASSWORD: 'password'
-    RAILS_DB_PORT: 5432
-  build:
-    context: ./config/docker/development
-    dockerfile: Rails.dockerfile
+    environment:
+      RAILS_DB_ADAPTER: 'postgresql'
+      RAILS_DB_HOST: 'cryptopus-postgres'
+      RAILS_DB_NAME: 'cryptopus-postgres-db'
+      RAILS_DB_USERNAME: 'postgres'
+      RAILS_DB_PASSWORD: 'password'
+      RAILS_DB_PORT: 5432
+    build:
+      context: ./config/docker/development
+      dockerfile: Rails.dockerfile
     ports:
       - 3000:3000
     volumes:
@@ -45,4 +45,4 @@ services:
       - "7357:7357"
 volumes:
   bundler_cache:
-    yarn_cache:
+  yarn_cache:
