@@ -43,6 +43,14 @@ services:
       - "4200:4200"
       - "7020:7020"
       - "7357:7357"
+  cryptopus-postgres:
+    image: postgres:12.10
+    container_name: cryptopus-postgres
+    environment:
+      POSTGRES_PASSWORD: password
+    restart: always
+    ports:
+      - "3306:3306"
 volumes:
   bundler_cache:
   yarn_cache:
