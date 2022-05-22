@@ -31,22 +31,6 @@ class Team < ApplicationRecord
                     tsearch: { prefix: true }
                   }
 
-  class << self
-    def create(creator, params)
-      team = super(params)
-      return team unless team.valid?
-
-      plaintext_team_password = Crypto::Symmetric::Aes256.random_key
-      team.add_user(creator, plaintext_team_password)
-      unless team.private?
-        User::Human.admins.each do |a|
-          team.add_user(a, plaintext_team_password) unless a == creator
-        end
-      end
-      team
-    end
-  end
-
   def label
     name
   end
