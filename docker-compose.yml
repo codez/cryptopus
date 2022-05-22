@@ -56,3 +56,4 @@ services:
 volumes:
   bundler_cache:
   yarn_cache:
+  cryptopus-postgres:
