@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ::Teams
   class QuerySearch < ::FilteredList
     def filter_by_query(teams)
@@ -5,4 +7,3 @@ module ::Teams
     end
   end
 end
-

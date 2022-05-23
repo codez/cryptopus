@@ -17,6 +17,6 @@ class FilteredList
   end
 
   def database_name
-    Rails.configuration.database_configuration[Rails.env]["database"]
+    Rails.configuration.database_configuration[Rails.env]['database']
   end
 end
