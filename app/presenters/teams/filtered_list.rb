@@ -46,23 +46,24 @@ module ::Teams
       @params[:limit]
     end
 
-    # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
     def filter_by_query(teams)
       if database_name.includes('cryptopus-postgres')
         QuerySearch.filter_by_query(teams)
       else
-      teams.includes(:folders, folders: [:encryptables]).where(
-        'lower(encryptables.description) LIKE :query
-        OR lower(encryptables.name) LIKE :query
-        OR lower(folders.name) LIKE :query
-        OR lower(teams.name) LIKE :query',
-        query: "%#{query}%"
-      )
-           .references(:folders,
-                       folders: [:encryptables])
+        teams.includes(:folders, folders: [:encryptables]).where(
+          'lower(encryptables.description) LIKE :query
+          OR lower(encryptables.name) LIKE :query
+          OR lower(folders.name) LIKE :query
+          OR lower(teams.name) LIKE :query',
+          query: "%#{query}%"
+        )
+             .references(:folders,
+                         folders: [:encryptables])
       end
     end
-    # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
+
     def filter_by_id
       [Team.find(team_id)]
     end
