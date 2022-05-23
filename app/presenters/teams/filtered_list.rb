@@ -47,6 +47,9 @@ module ::Teams
     end
 
     def filter_by_query(teams)
+      if database_name.includes('cryptopus-postgres')
+        QuerySearch.filter_by_query(teams)
+      else
       teams.includes(:folders, folders: [:encryptables]).where(
         'lower(encryptables.description) LIKE :query
         OR lower(encryptables.name) LIKE :query
@@ -56,6 +59,7 @@ module ::Teams
       )
            .references(:folders,
                        folders: [:encryptables])
+      end
     end
 
     def filter_by_id
