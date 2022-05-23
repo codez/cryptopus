@@ -50,7 +50,7 @@ module ::Teams
       if database_name.include? 'cryptopus-postgres'
         @query_search = Teams::QuerySearch.new(@current_user, @params)
       end
-        @query_search.filter_by_query(teams, query) || sql_filter_by_query(teams)
+      @query_search.filter_by_query(teams, query) || sql_filter_by_query(teams)
     end
 
     def sql_filter_by_query(teams)
